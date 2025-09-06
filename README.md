@@ -1,1 +1,1 @@
-# aed1
+# Repositório da disciplina de Algoritmos e Estruturas de Dados I, 2025
