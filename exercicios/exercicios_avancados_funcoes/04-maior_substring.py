@@ -18,7 +18,5 @@ def maior_substring_unica(string):
     return substring_final
 
 
-
 string = "abcabcfgbb"
-
 print(maior_substring_unica(string))

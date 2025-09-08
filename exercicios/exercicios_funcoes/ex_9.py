@@ -1,4 +1,3 @@
-
 def verif_expressao_matematica(string):
     last_simbolo = ""
     for char in string:

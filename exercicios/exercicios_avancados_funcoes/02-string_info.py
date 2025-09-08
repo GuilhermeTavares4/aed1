@@ -10,6 +10,7 @@ def info_da_string(string):
 
     return lista_info
 
+
 def media_len_palavras(string):
     lista_string = string.split()
     soma = 0
@@ -21,6 +22,7 @@ def media_len_palavras(string):
 
     return media
 
+
 def palavra_mais_longa(string):
     palavra = ""
     maior_len = 0
@@ -31,6 +33,7 @@ def palavra_mais_longa(string):
             maior_len = len(i)
 
     return palavra
+
 
 string = "porra 123 aaa"
 print(info_da_string(string))

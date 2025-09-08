@@ -5,8 +5,6 @@ def organiza_palavras(string):
     return lista_palavras
 
 
-
-
 def organiza_tamanho(lista):
     
     i = 0
@@ -21,6 +19,7 @@ def organiza_tamanho(lista):
         i += 1
         
     return lista
+
 
 def organiza_alfabeticamente(lista):
 
@@ -41,6 +40,6 @@ def organiza_alfabeticamente(lista):
 
     return lista
 
-string = "banana uva abacaxi pera morango"
 
+string = "banana uva abacaxi pera morango"
 print(organiza_palavras(string))
