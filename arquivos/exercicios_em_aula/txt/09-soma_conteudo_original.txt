@@ -1,0 +1,3 @@
+texto nao comentado
+//texto comentado
+palavras

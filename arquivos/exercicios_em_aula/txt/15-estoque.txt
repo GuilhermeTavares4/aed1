@@ -1,0 +1,4 @@
+14892;tecido feio;14;60
+14893;tecido bonito;16;60
+14894;tecido um pouco feio;14;40
+14895;tecido um pouco bonito;16;40
