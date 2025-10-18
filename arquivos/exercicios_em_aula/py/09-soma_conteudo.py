@@ -28,5 +28,4 @@ def soma_conteudo(arq1, arq2):
 
 arq1 = input("Digite o nome do primeiro arquivo: ")
 arq2 = input("Digite o nome do segundo arquivo: ")
-
 soma_conteudo(arq1, arq2)

@@ -15,6 +15,7 @@ def get_nomes(arq_nomes, arq_notas):
             alunos.append(aluno)
     get_notas(arq_notas)
 
+
 def get_notas(arq_notas):
     if not os.path.exists(caminho + arq_notas):
         print('arquivo naoe xiste vai se foder')
@@ -47,7 +48,6 @@ def gera_arquivo_medias(arq_medias):
 
 caminho = 'txt/'
 alunos = []
-
 get_nomes('13-nomes.txt', '13-notas.txt')
 gera_arquivo_medias('13-medias.txt')
 print(alunos)

@@ -26,6 +26,4 @@ def cidade_mais_populosa(arq1, arq2):
         arq2.write(f'{cidade_max[0]}: {cidade_max[1]}')
 
 
-
-
 cidade_mais_populosa("10-cidade_mais_populosa_read.txt", "10-cidade_mais_populosa_write.txt")

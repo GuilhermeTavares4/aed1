@@ -35,12 +35,9 @@ def read_clientes():
             print(texto)
 
 
-
 clientes = []
-
 add_cliente('guiherme', 1613, 300, 400, 500)                
 add_cliente('breno', 1782, 300, 400, 200)                
 add_cliente('breno2', 1439, 300, 400, 600)                
-
 write_clientes()
 read_clientes()

@@ -1,6 +1,5 @@
 import os.path
 
-
 def cria_pessoas(ano, arq1, arq2):
     if not os.path.exists(caminho + arq1):
         print('arquivo naoe xiste vai se foder')
@@ -16,7 +15,6 @@ def cria_pessoas(ano, arq1, arq2):
                 "data_nascimento": int(info[1])
             }
             pessoas.append(pessoa)
-        
     write_pessoas(ano, arq2, pessoas)
 
 
@@ -37,10 +35,8 @@ def write_pessoas(ano, arq2, pessoas):
             
 
 caminho = 'txt/'
-
 ano = int(input("Digite o ano atual: "))
 arq1 = input("Digite o nome do primeiro arquivo: ")
 arq2 = input("Digite o nome do segundo arquivo: ")
-
 cria_pessoas(ano, arq1, arq2)
 

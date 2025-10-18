@@ -17,6 +17,7 @@ def read_ips(arq_ips):
         ips = ips.splitlines()
     gera_arquivos_ips(ips)
 
+
 def gera_arquivos_ips(ips):
     with open(caminho + '14-ips_validos', 'w') as arq:
         texto_arq = ""
@@ -35,10 +36,6 @@ def gera_arquivos_ips(ips):
         arq.write(texto_arq)
 
 
-
-
-
 caminho = "txt/"
 list_ips = []
-
 read_ips('14-ips.txt')

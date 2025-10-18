@@ -14,6 +14,7 @@ def read_tecidos(arq_estoque):
             tecidos[i][3] = int(tecidos[i][3])
     return tecidos    
 
+
 def write_tecidos(tecidos):
     if tecidos == False:
         return
@@ -31,9 +32,8 @@ def write_tecidos(tecidos):
                 tecidos_menor_15reais += tecido[0] + ";" + str(tecido[2]) + "\n"
         arq.write(tecidos_menor_15reais)
 
+
 caminho = 'txt/'
-
-
 write_tecidos(read_tecidos('15-estoque.txt'))
     
 

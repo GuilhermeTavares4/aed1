@@ -17,6 +17,7 @@ def read_linhas(arq_linhas):
     write_linhas(linhas)
     return 0
     
+    
 def write_linhas(linhas):
     linhas_sem_os_bgl = filter(verif_linha, linhas)
     texto = ""
@@ -25,6 +26,6 @@ def write_linhas(linhas):
     with open(caminho + "16-linhas_filtradas.txt", 'w') as arq:
         arq.write(texto)
 
-caminho = 'txt/'
 
+caminho = 'txt/'
 print(read_linhas('16-linhas_nao_filtradas.txt'))

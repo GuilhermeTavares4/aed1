@@ -14,10 +14,10 @@ def add_alunos(nome, matricula, nota1, nota2, nota3):
         texto = texto[:-1]
         texto += "\n"
         arq.write(texto)
+
     
 with open('exercicios_em_aula/txt/08-alunos.txt', 'w') as arq:
     arq.write("")
-
 
 alunos = []
 num_alunos = int(input("Quantidade de alunos a inserir: "))
