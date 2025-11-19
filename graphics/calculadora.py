@@ -6,19 +6,19 @@ def generateBackground():
     background.draw(win)
 
 def generateButtons():
-    button_posX = 220
-    button_posY = 200
+    button_x_pos = 220
+    button_y_pos = 200
     for i, text in enumerate(buttons.keys()):
-        spawnPoint = gf.Point(button_posX, button_posY)
+        spawnPoint = gf.Point(button_x_pos, button_y_pos)
         buttons[text] = spawnPoint
         button = gf.Circle(spawnPoint, button_radius)
         button.draw(win)
         text = gf.Text(spawnPoint, text)
         text.draw(win)
-        button_posX += 50
+        button_x_pos += 50
         if (i + 1) % 4 == 0:
-            button_posY += button_radius * 2 + 10
-            button_posX = 220
+            button_y_pos += button_radius * 2 + 10
+            button_x_pos = 220
 
 def generateScreen():
     screen = gf.Rectangle(gf.Point(200, 100), gf.Point(400, 150))
@@ -37,25 +37,75 @@ def isActionValid(action):
     if action == '':
         return False
     if len(used_expression) != 0:
-        if used_expression[-1] in operations and action in operations:
+        if str(used_expression[-1])[0] in numbers and action == 'sqrt':
+            return False
+        if str(used_expression[-1]) in operations and action in operations and action != 'sqrt':
             return False
         if used_expression[-1] == ',' and action not in numbers:
             return False
-        if used_expression[-1] not in numbers and action == ',':
+        if str(used_expression[-1])[0] not in numbers and action == ',':
             return False
-        if used_expression not in numbers and action == '=':
+        if str(used_expression[-1])[0] not in numbers and action == '=':
             return False
     return True
         
 
 def updateShownExpression(char):
+    char = str(char)
     global shown_expression
+    if len(used_expression) > 0:
+        if (str(used_expression[-1])[0] not in numbers or char not in numbers) and char != ',' and used_expression[-1] != ',':
+            shown_expression += ' '
     shown_expression += char
-    if len(used_expression) > 1:
-        if used_expression[-1] not in numbers or char not in numbers:
-            shown_expression += ' ' # arrumar esse coco aqui
-
     expression_text.setText(shown_expression)
+
+
+def transform_str_into_num(expression):
+    for i, item in enumerate(expression):
+        if str(item)[0] in numbers and str(item)[0] in numbers:
+            expression[i] = float(item)
+
+    return expression
+
+
+def do_the_math(expression):
+    if len(expression) == 1:
+        return expression
+    if 'sqrt' in expression:
+        op_index = expression.index('sqrt')
+        temp_result = math.sqrt(expression[op_index + 1]) 
+
+    elif '^' in expression:
+        op_index = expression.index('^')
+        temp_result = expression[op_index - 1] ** expression[op_index + 1]
+        
+    elif 'x' in expression:
+        op_index = expression.index('x')
+        temp_result = expression[op_index - 1] * expression[op_index + 1]
+
+    elif '/' in expression:
+        op_index = expression.index('/')
+        temp_result = expression[op_index - 1] / expression[op_index + 1]
+
+    elif '+' in expression:
+        op_index = expression.index('+')
+        temp_result = expression[op_index - 1] + expression[op_index + 1]
+
+    elif '-' in expression:
+        op_index = expression.index('-')
+        temp_result = expression[op_index - 1] - expression[op_index + 1]
+    
+    expression[op_index + 1] = temp_result
+    if expression[op_index] != 'sqrt':
+        expression.pop(op_index - 1)
+        expression.pop(op_index - 1)
+    else:
+        expression.pop(op_index)
+
+    return do_the_math(expression)
+
+
+
 
 window_size = 600
 
@@ -67,7 +117,7 @@ buttons =  {
     '7': '',
     '8': '',
     '9': '',
-    'X': '',
+    'x': '',
     '4': '',
     '5': '',
     '6': '',
@@ -83,9 +133,9 @@ buttons =  {
  }
 
 numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-operations = ['+', 'sqrt', '-', 'X', '/', '^']
+operations = ['+', 'sqrt', '-', 'x', '/', '^']
 shown_expression = ""
-used_expression = ""
+used_expression = []
 
 button_radius = 20
 win = gf.GraphWin('Janelha', window_size, window_size)
@@ -100,15 +150,33 @@ while True:
     click = win.getMouse()
     action = getButtonClicked(click)
     if isActionValid(action):
-        updateShownExpression(action)
-        if action == 'AC':
-            used_expression = ''
+        if action == '=' and len(used_expression) >= 2:
+            used_expression = do_the_math(transform_str_into_num(used_expression))
             shown_expression = ''
+            updateShownExpression(str(used_expression[0]))
+
             continue
-        
-        used_expression += action
-        if action == 'del':
-            break
-        
+        if  action == 'AC':
+            used_expression = []
+            shown_expression = ''
+            updateShownExpression('')
+            continue
+        updateShownExpression(action)
+        if len(used_expression) > 0:
+            if str(used_expression[-1])[0] in numbers and action[0] in numbers or action == ',':
+                used_expression[-1] += action
+            else:
+                used_expression.append(action)
+
+        else:
+            if action != 'sqrt':
+                used_expression.append(action)
+            else:
+                used_expression.insert(-1, action)
+
+        print(used_expression)
 
 
+#coisas a fazer:
+#    arrumar a ordem das operaçoes
+#    botar sqrt antes do valor adicionado
