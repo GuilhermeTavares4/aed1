@@ -1,21 +1,28 @@
+import os
+
 def compacta(filepath):
-    with open ('texto.txt', 'r', encoding='UTF-8') as arq:
+    if not os.path.exists(filepath):
+        print("O arquivo não existe.")
+        return
+    with open (filepath, 'r', encoding='UTF-8') as arq:
         palavras_txt = []
         for linha in arq.readlines():
             palavras_txt += linha.split(' ')
-        palavras_filtradas = []
+        dicionario_palavras = {}
         posicoes = []
+        pos = 0
         for palavra in palavras_txt:
-            if palavra not in palavras_filtradas:
-                palavras_filtradas.append(palavra)
-            posicoes.append(str(palavras_filtradas.index(palavra)))
+            if palavra not in dicionario_palavras:
+                dicionario_palavras[palavra] = pos
+                pos += 1
+            posicoes.append(str(dicionario_palavras[palavra]))
         palavras_string = ''
-        for palavra in palavras_filtradas:
+        for palavra in dicionario_palavras.keys():
             palavras_string += palavra
             if '\n' not in palavra:
                 palavras_string += ' '
     posicoes_string = " ".join(posicoes)
-    with open('texto_compactado.txt', 'w', encoding='UTF-8') as arq:
+    with open('texto_compactado.gui', 'w', encoding='UTF-8') as arq:
         texto = palavras_string
         if texto[-1] != '\n':
             texto += '\n'
@@ -23,5 +30,5 @@ def compacta(filepath):
         arq.write(texto)
 
 
-
-compacta('a')
+filepath = input('Digite o nome do arquivo para compactar: ')
+compacta(filepath)

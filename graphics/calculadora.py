@@ -50,11 +50,10 @@ def isActionValid(action):
     return True
         
 
-def updateShownExpression(char):
-    char = str(char)
+def updateShownExpression(expression):
     global shown_expression
-    if len(used_expression) > 0:
-        if (str(used_expression[-1])[0] not in numbers or char not in numbers) and char != ',' and used_expression[-1] != ',':
+    for item in expression:
+        shown
             shown_expression += ' '
     shown_expression += char
     expression_text.setText(shown_expression)
@@ -106,7 +105,6 @@ def do_the_math(expression):
 
 
 
-
 window_size = 600
 
 buttons =  {
@@ -153,15 +151,14 @@ while True:
         if action == '=' and len(used_expression) >= 2:
             used_expression = do_the_math(transform_str_into_num(used_expression))
             shown_expression = ''
-            updateShownExpression(str(used_expression[0]))
+            updateShownExpression(used_expression)
 
             continue
         if  action == 'AC':
             used_expression = []
             shown_expression = ''
-            updateShownExpression('')
+            updateShownExpression(used_expression)
             continue
-        updateShownExpression(action)
         if len(used_expression) > 0:
             if str(used_expression[-1])[0] in numbers and action[0] in numbers or action == ',':
                 used_expression[-1] += action
@@ -173,6 +170,9 @@ while True:
                 used_expression.append(action)
             else:
                 used_expression.insert(-1, action)
+            
+        updateShownExpression(used_expression)
+        
 
         print(used_expression)
 
@@ -180,3 +180,6 @@ while True:
 #coisas a fazer:
 #    arrumar a ordem das operaçoes
 #    botar sqrt antes do valor adicionado
+
+
+
